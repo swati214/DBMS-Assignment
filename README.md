@@ -12,4 +12,4 @@ This repository contains SQL scripts, queries, and database schema for DBMS lab 
 Open the SQL file in your SQL tool and execute the queries.
 
 ## Author
-Your Name
+Your Swati

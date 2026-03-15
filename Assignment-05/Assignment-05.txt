@@ -1,0 +1,821 @@
+
+
+
+SQL> DESC Student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STUDENT_ID                                NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(50)
+ DATE_OF_BIRTH                                      DATE
+ GENDER                                             CHAR(1)
+ CONTACT_NO                                         VARCHAR2(13)
+ DEPT_ID                                            NUMBER(38)
+ CITY                                               VARCHAR2(50)
+ SEMESTER                                           VARCHAR2(50)
+
+SQL> SELECT S.STUDENT_ID, S.NAME, E.COURSE_ID
+  2  FROM STUDENT S
+  3  INNER JOIN ENROLLMENT E
+  4  ON S.STUDENT_ID = E.STUDENT_ID;
+
+STUDENT_ID NAME                                                COURSE_ID
+---------- -------------------------------------------------- ----------
+       208 Vikash kumar                                              405
+       209 Puja kumari                                               406
+       210 soni kumari                                               407
+       201 Sweta kumari                                              402
+       203 Laxmi kumari                                              404
+       204 Himanshu kumar                                            401
+       205 Atisha rajput                                             402
+       206 Alok kumar                                                403
+       207 Suman kumar                                               404
+       208 Vikash kumar                                              405
+
+10 rows selected.
+
+SQL> SELECT S.NAME, E.SEMESTER
+  2  FROM STUDENT S
+  3  INNER JOIN ENROLLMENT E
+  4  ON S.STUDENT_ID = E.STUDENT_ID;
+
+NAME                                               SEMESTER
+-------------------------------------------------- ----------
+Vikash kumar                                       2
+Puja kumari                                        3
+soni kumari                                        4
+Sweta kumari                                       5
+Laxmi kumari                                       3
+Himanshu kumar                                     2
+Atisha rajput                                      3
+Alok kumar                                         4
+Suman kumar                                        5
+Vikash kumar                                       2
+
+10 rows selected.
+
+SQL> SELECT S.NAME, E.GRADE
+  2  FROM STUDENT S
+  3  INNER JOIN ENROLLMENT E
+  4  ON S.STUDENT_ID = E.STUDENT_ID;
+
+NAME                                               GRADE
+-------------------------------------------------- -----
+Vikash kumar                                       B+
+Puja kumari                                        A
+soni kumari                                        B
+Sweta kumari                                       A+
+Laxmi kumari                                       B+
+Himanshu kumar                                     A
+Atisha rajput                                      B+
+Alok kumar                                         A
+Suman kumar                                        B
+Vikash kumar                                       A+
+
+10 rows selected.
+
+SQL> SELECT C.COURSE_NAME, C.CREDITS, F.NAME
+  2  FROM COURSE C
+  3  INNER JOIN FACULTY F
+  4  ON C.FACULTY_ID = F.FACULTY_ID;
+
+COURSE_NAME                       CREDITS
+------------------------------ ----------
+NAME
+--------------------------------------------------
+PFPS                                    4
+Prof. Arun Kumar
+
+COA                                     4
+Prof. Manisha kumari Singh
+
+Operating system                        4
+Prof. Md.Izhar
+
+
+COURSE_NAME                       CREDITS
+------------------------------ ----------
+NAME
+--------------------------------------------------
+Dsa                                     4
+Prof.Sujeet kumar
+
+Dbms                                    4
+Prof. Murlidhar Prasad Singh
+
+BEE                                     4
+Prof. Anil Kumar
+
+
+COURSE_NAME                       CREDITS
+------------------------------ ----------
+NAME
+--------------------------------------------------
+computer network                        4
+Mr. Ravi Kumar
+
+Digital logic                           4
+Prof. Md. Ehtashamoul Haque
+
+Machine learning                        4
+Prof. Amit Kumar
+
+
+COURSE_NAME                       CREDITS
+------------------------------ ----------
+NAME
+--------------------------------------------------
+AI                                      4
+Dr. Pankaj
+
+
+10 rows selected.
+
+
+
+
+
+
+SQL> DESC Faculty;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ FACULTY_ID                                NOT NULL NUMBER(38)
+ NAME                                               VARCHAR2(50)
+ DESIGNATION                                        VARCHAR2(50)
+ EMAIL                                              VARCHAR2(50)
+ DEPT_ID                                            NUMBER(38)
+
+SQL> SELECT *FROM Faculty;
+
+FACULTY_ID NAME
+---------- --------------------------------------------------
+DESIGNATION
+--------------------------------------------------
+EMAIL                                                 DEPT_ID
+-------------------------------------------------- ----------
+       301 Prof. Murlidhar Prasad Singh
+Assistant Professor,Head Of Department
+singhmurlidhar@gmail.com                                  101
+
+       302 Prof. Md. Ehtashamoul Haque
+Assistant Professor
+ehtasham47@gmail.com                                      101
+
+FACULTY_ID NAME
+---------- --------------------------------------------------
+DESIGNATION
+--------------------------------------------------
+EMAIL                                                 DEPT_ID
+-------------------------------------------------- ----------
+
+       303 Prof. Arun Kumar
+Assistant Professor(Guest)
+arunkr75@gmail.com                                        101
+
+       304 Prof. Amit Kumar
+Assistant Professor
+
+FACULTY_ID NAME
+---------- --------------------------------------------------
+DESIGNATION
+--------------------------------------------------
+EMAIL                                                 DEPT_ID
+-------------------------------------------------- ----------
+amitbcebhagalpur@gmail.com                                101
+
+       305 Prof. Md.Izhar
+Assistant Professor
+mdizhar@gmail.com                                         101
+
+       306 Mr. Ravi Kumar
+
+FACULTY_ID NAME
+---------- --------------------------------------------------
+DESIGNATION
+--------------------------------------------------
+EMAIL                                                 DEPT_ID
+-------------------------------------------------- ----------
+Lab Assistant(Guest)
+sonubhardwaj4200@gmail.com                                101
+
+       307 Prof. Manisha kumari Singh
+Assistant Professor
+manisha.ks241@gmail.com                                   101
+
+
+FACULTY_ID NAME
+---------- --------------------------------------------------
+DESIGNATION
+--------------------------------------------------
+EMAIL                                                 DEPT_ID
+-------------------------------------------------- ----------
+       308 Prof.Sujeet kumar
+Assistant Professor
+sujeet198@gmail.com                                       101
+
+       309 Prof. Anil Kumar
+Assistant Professor
+anil@bpmce.ac.in                                          101
+
+FACULTY_ID NAME
+---------- --------------------------------------------------
+DESIGNATION
+--------------------------------------------------
+EMAIL                                                 DEPT_ID
+-------------------------------------------------- ----------
+
+       310 Dr. Pankaj
+Assistant Professor
+pankajkr345@gmail.com                                     101
+
+
+10 rows selected.
+
+
+
+SQL> SELECT C.COURSE_NAME
+  2  FROM COURSE C
+  3  INNER JOIN FACULTY F
+  4  ON C.FACULTY_ID = F.FACULTY_ID
+  5  WHERE F.FACULTY_ID =308;
+
+COURSE_NAME
+------------------------------
+Dsa
+
+SQL> SELECT F.NAME, F.DESIGNATION, C.COURSE_NAME
+  2  FROM FACULTY F
+  3  INNER JOIN COURSE C
+  4  ON F.FACULTY_ID = C.FACULTY_ID;
+
+NAME
+--------------------------------------------------
+DESIGNATION
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Prof. Arun Kumar
+Assistant Professor(Guest)
+PFPS
+
+Prof. Manisha kumari Singh
+Assistant Professor
+COA
+
+NAME
+--------------------------------------------------
+DESIGNATION
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+
+Prof. Md.Izhar
+Assistant Professor
+Operating system
+
+Prof.Sujeet kumar
+Assistant Professor
+
+NAME
+--------------------------------------------------
+DESIGNATION
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Dsa
+
+Prof. Murlidhar Prasad Singh
+Assistant Professor,Head Of Department
+Dbms
+
+Prof. Anil Kumar
+
+NAME
+--------------------------------------------------
+DESIGNATION
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Assistant Professor
+BEE
+
+Mr. Ravi Kumar
+Lab Assistant(Guest)
+computer network
+
+
+NAME
+--------------------------------------------------
+DESIGNATION
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Prof. Md. Ehtashamoul Haque
+Assistant Professor
+Digital logic
+
+Prof. Amit Kumar
+Assistant Professor
+Machine learning
+
+NAME
+--------------------------------------------------
+DESIGNATION
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+
+Dr. Pankaj
+Assistant Professor
+AI
+
+
+10 rows selected.
+
+SQL> SELECT S.NAME, C.COURSE_NAME
+  2  FROM STUDENT S
+  3  INNER JOIN ENROLLMENT E
+  4  ON S.STUDENT_ID = E.STUDENT_ID
+  5  INNER JOIN COURSE C
+  6  ON E.COURSE_ID = C.COURSE_ID;
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Himanshu kumar
+PFPS
+
+Sweta kumari
+COA
+
+Atisha rajput
+COA
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Alok kumar
+Operating system
+
+Laxmi kumari
+Dsa
+
+Suman kumar
+Dsa
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Vikash kumar
+Dbms
+
+Vikash kumar
+Dbms
+
+Puja kumari
+BEE
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+soni kumari
+computer network
+
+
+10 rows selected.
+
+SQL> SELECT S.NAME, C.COURSE_NAME, E.SEMESTER
+  2  FROM STUDENT S
+  3  INNER JOIN ENROLLMENT E
+  4  ON S.STUDENT_ID = E.STUDENT_ID
+  5  INNER JOIN COURSE C
+  6  ON E.COURSE_ID = C.COURSE_ID;
+
+NAME
+--------------------------------------------------
+COURSE_NAME                    SEMESTER
+------------------------------ ----------
+Himanshu kumar
+PFPS                           2
+
+Sweta kumari
+COA                            5
+
+Atisha rajput
+COA                            3
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME                    SEMESTER
+------------------------------ ----------
+Alok kumar
+Operating system               4
+
+Laxmi kumari
+Dsa                            3
+
+Suman kumar
+Dsa                            5
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME                    SEMESTER
+------------------------------ ----------
+Vikash kumar
+Dbms                           2
+
+Vikash kumar
+Dbms                           2
+
+Puja kumari
+BEE                            3
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME                    SEMESTER
+------------------------------ ----------
+soni kumari
+computer network               4
+
+
+10 rows selected.
+
+SQL> SELECT S.NAME, S.DEPT_ID, C.COURSE_NAME
+  2  FROM STUDENT S
+  3  INNER JOIN ENROLLMENT E
+  4  ON S.STUDENT_ID = E.STUDENT_ID
+  5  INNER JOIN COURSE C
+  6  ON E.COURSE_ID = C.COURSE_ID;
+
+NAME                                                  DEPT_ID
+-------------------------------------------------- ----------
+COURSE_NAME
+------------------------------
+Himanshu kumar                                            102
+PFPS
+
+Sweta kumari                                              101
+COA
+
+Atisha rajput                                             101
+COA
+
+
+NAME                                                  DEPT_ID
+-------------------------------------------------- ----------
+COURSE_NAME
+------------------------------
+Alok kumar                                                102
+Operating system
+
+Laxmi kumari                                              101
+Dsa
+
+Suman kumar                                               102
+Dsa
+
+
+NAME                                                  DEPT_ID
+-------------------------------------------------- ----------
+COURSE_NAME
+------------------------------
+Vikash kumar                                              101
+Dbms
+
+Vikash kumar                                              101
+Dbms
+
+Puja kumari                                               101
+BEE
+
+
+NAME                                                  DEPT_ID
+-------------------------------------------------- ----------
+COURSE_NAME
+------------------------------
+soni kumari                                               101
+computer network
+
+
+10 rows selected.
+
+SQL> SELECT D.DEPT_ID, C.COURSE_NAME
+  2  FROM DEPARTMENT D
+  3  INNER JOIN COURSE C
+  4  ON D.DEPT_ID = C.DEPT_ID;
+
+   DEPT_ID COURSE_NAME
+---------- ------------------------------
+       101 PFPS
+       101 COA
+       101 Operating system
+       101 Dsa
+       101 Dbms
+       101 BEE
+       101 computer network
+       101 Digital logic
+       101 Machine learning
+       101 AI
+
+10 rows selected.
+
+SQL> SELECT F.NAME, D.DEPT_NAME
+  2  FROM FACULTY F
+  3  INNER JOIN DEPARTMENT D
+  4  ON F.DEPT_ID = D.DEPT_ID;
+
+NAME
+--------------------------------------------------
+DEPT_NAME
+--------------------------------------------------
+Prof. Murlidhar Prasad Singh
+Civil Engineering
+
+Prof. Md. Ehtashamoul Haque
+Civil Engineering
+
+Prof. Arun Kumar
+Civil Engineering
+
+
+NAME
+--------------------------------------------------
+DEPT_NAME
+--------------------------------------------------
+Prof. Amit Kumar
+Civil Engineering
+
+Prof. Md.Izhar
+Civil Engineering
+
+Mr. Ravi Kumar
+Civil Engineering
+
+
+NAME
+--------------------------------------------------
+DEPT_NAME
+--------------------------------------------------
+Prof. Manisha kumari Singh
+Civil Engineering
+
+Prof.Sujeet kumar
+Civil Engineering
+
+Prof. Anil Kumar
+Civil Engineering
+
+
+NAME
+--------------------------------------------------
+DEPT_NAME
+--------------------------------------------------
+Dr. Pankaj
+Civil Engineering
+
+
+10 rows selected.
+
+SQL> SELECT S.NAME, C.COURSE_NAME
+  2  FROM STUDENT S
+  3  INNER JOIN ENROLLMENT E
+  4  ON S.STUDENT_ID = E.STUDENT_ID
+  5  INNER JOIN COURSE C
+  6  ON E.COURSE_ID = C.COURSE_ID
+  7  WHERE S.DEPT_ID =101;
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Sweta kumari
+COA
+
+Atisha rajput
+COA
+
+Laxmi kumari
+Dsa
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Vikash kumar
+Dbms
+
+Vikash kumar
+Dbms
+
+Puja kumari
+BEE
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+soni kumari
+computer network
+
+
+7 rows selected.
+
+SQL> SELECT S.NAME, C.COURSE_NAME
+  2  FROM STUDENT S
+  3  INNER JOIN ENROLLMENT E
+  4  ON S.STUDENT_ID = E.STUDENT_ID
+  5  INNER JOIN COURSE C
+  6  ON E.COURSE_ID = C.COURSE_ID
+  7  ORDER BY S.NAME ASC;
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Alok kumar
+Operating system
+
+Atisha rajput
+COA
+
+Himanshu kumar
+PFPS
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Laxmi kumari
+Dsa
+
+Puja kumari
+BEE
+
+Suman kumar
+Dsa
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Sweta kumari
+COA
+
+Vikash kumar
+Dbms
+
+Vikash kumar
+Dbms
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+soni kumari
+computer network
+
+
+10 rows selected.
+
+SQL> SELECT F.NAME, C.COURSE_NAME
+  2  FROM FACULTY F
+  3  INNER JOIN COURSE C
+  4  ON F.FACULTY_ID = C.FACULTY_ID
+  5  ORDER BY C.CREDITS DESC;
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Prof. Arun Kumar
+PFPS
+
+Prof. Manisha kumari Singh
+COA
+
+Prof. Md.Izhar
+Operating system
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Prof.Sujeet kumar
+Dsa
+
+Dr. Pankaj
+AI
+
+Prof. Anil Kumar
+BEE
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Mr. Ravi Kumar
+computer network
+
+Prof. Md. Ehtashamoul Haque
+Digital logic
+
+Prof. Amit Kumar
+Machine learning
+
+
+NAME
+--------------------------------------------------
+COURSE_NAME
+------------------------------
+Prof. Murlidhar Prasad Singh
+Dbms
+
+
+10 rows selected.
+
+SQL> SELECT C.COURSE_NAME, COUNT(E.STUDENT_ID) AS TOTAL_STUDENTS
+  2  FROM COURSE C
+  3  INNER JOIN ENROLLMENT E
+  4  ON C.COURSE_ID = E.COURSE_ID
+  5  GROUP BY C.COURSE_NAME;
+
+COURSE_NAME                    TOTAL_STUDENTS
+------------------------------ --------------
+Dbms                                        2
+BEE                                         1
+computer network                            1
+COA                                         2
+Dsa                                         2
+PFPS                                        1
+Operating system                            1
+
+7 rows selected.
+
+SQL> SELECT F.NAME, COUNT(C.COURSE_ID) AS TOTAL_COURSES
+  2  FROM FACULTY F
+  3  INNER JOIN COURSE C
+  4  ON F.FACULTY_ID = C.FACULTY_ID
+  5  GROUP BY F.NAME;
+
+NAME                                               TOTAL_COURSES
+-------------------------------------------------- -------------
+Prof. Arun Kumar                                               1
+Prof. Manisha kumari Singh                                     1
+Prof. Md.Izhar                                                 1
+Prof.Sujeet kumar                                              1
+Prof. Murlidhar Prasad Singh                                   1
+Prof. Anil Kumar                                               1
+Mr. Ravi Kumar                                                 1
+Prof. Md. Ehtashamoul Haque                                    1
+Prof. Amit Kumar                                               1
+Dr. Pankaj                                                     1
+
+10 rows selected.
+
+SQL> SELECT DEPT_ID, COUNT(STUDENT_ID) AS TOTAL_STUDENTS
+  2  FROM STUDENT
+  3  GROUP BY DEPT_ID;
+
+   DEPT_ID TOTAL_STUDENTS
+---------- --------------
+       101              7
+       102              3
+
+SQL> SELECT C.COURSE_NAME, MAX(E.GRADE) AS MAX_GRADE
+  2  FROM COURSE C
+  3  INNER JOIN ENROLLMENT E
+  4  ON C.COURSE_ID = E.COURSE_ID
+  5  GROUP BY C.COURSE_NAME;
+
+COURSE_NAME                    MAX_G
+------------------------------ -----
+Dbms                           B+
+BEE                            A
+computer network               B
+COA                            B+
+Dsa                            B+
+PFPS                           A
+Operating system               A
+
+7 rows selected.
+
+SQL> COMMIT;
+
+Commit complete.
+

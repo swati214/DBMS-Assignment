@@ -1,0 +1,264 @@
+SQL> SELECT COUNT(*)AS TOTAL_STUDENT
+  2  FROM STUDENT;
+
+TOTAL_STUDENT
+-------------
+           10
+
+SQL> SELECT COUNT(*)AS TOTAL_FACULTY
+  2  FROM FACULTY;
+
+TOTAL_FACULTY
+-------------
+           10
+
+SQL> SELECT COUNT(*)AS TOTAL_COURSE
+  2  FROM COURSE;
+
+TOTAL_COURSE
+------------
+          10
+
+
+
+
+SQL> SELECT MAX(CREDITS)AS MAX_CREDITS
+  2  FROM COURSE;
+
+MAX_CREDITS
+-----------
+          4
+
+SQL> SELECT MIN(CREDITS)AS MIN_CREDITS
+  2  FROM COURSE;
+
+MIN_CREDITS
+-----------
+        4
+
+
+
+SQL> SELECT DEPT_ID,COUNT(*)AS TOTAL_STUDENT
+  2  FROM STUDENT
+  3  GROUP BY DEPT_ID;
+
+   DEPT_ID TOTAL_STUDENT
+---------- -------------
+       101             7
+       102             3
+
+SQL> SELECT DEPT_ID,COUNT(*)AS TOTAL_FACULTY
+  2  FROM FACULTY
+  3  GROUP BY DEPT_ID;
+
+   DEPT_ID TOTAL_FACULTY
+---------- -------------
+       101            10
+
+SQL> SELECT DEPT_ID,COUNT(*)AS TOTAL_COURSE
+  2  FROM COURSE
+  3  GROUP BY DEPT_ID;
+
+   DEPT_ID TOTAL_COURSE
+---------- ------------
+       101           10
+
+SQL> SELECT SEMESTER,COUNT(*)AS TOTAL_ENROLLMENT
+  2  FROM ENROLLMENT
+  3  GROUP BY SEMESTER;
+
+SEMESTER   TOTAL_ENROLLMENT
+---------- ----------------
+2                         3
+3                         3
+4                         2
+5                         2
+
+SQL> SELECT GRADE,COUNT(*)AS TOTAL_STUDENT
+  2  FROM ENROLLMENT
+  3  GROUP BY GRADE;
+
+GRADE TOTAL_STUDENT
+----- -------------
+B+                3
+A                 3
+B                 2
+A+                2
+
+SQL> SELECT DEPT_ID,COUNT(*)AS TOTAL_STUDENT
+  2  FROM STUDENT
+  3  GROUP BY DEPT_ID
+  4  HAVING COUNT(*)>3;
+
+   DEPT_ID TOTAL_STUDENT
+---------- -------------
+       101             7
+
+
+
+
+SQL> SELECT SEMESTER,COUNT(*)AS TOTAL_ENROLLMENT
+  2  FROM ENROLLMENT
+  3   GROUP BY SEMESTER
+  4   HAVING COUNT(*)>2;
+
+SEMESTER   TOTAL_ENROLLMENT
+---------- ----------------
+2                         3
+3                         3
+
+
+
+
+SQL> SELECT GRADE,COUNT(*)AS TOTAL_ENROLLMENT
+  2  FROM ENROLLMENT
+  3  GROUP BY GRADE
+  4  HAVING COUNT(*)>1;
+
+GRADE TOTAL_ENROLLMENT
+----- ----------------
+B+                   3
+A                    3
+B                    2
+A+                   2
+
+SQL> SELECT DEPT_ID,COUNT(*)AS TOTAL_COURSE
+  2  FROM COURSE
+  3  GROUP BY DEPT_ID
+  4  HAVING COUNT(*)>1;
+
+   DEPT_ID TOTAL_COURSE
+---------- ------------
+       101           10
+
+SQL> SELECT COURSE_ID,COUNT(STUDENT_ID)AS ENROLLED_STUDENT
+  2  FROM ENROLLMENT
+  3  GROUP BY COURSE_ID;
+
+ COURSE_ID ENROLLED_STUDENT
+---------- ----------------
+       405                2
+       406                1
+       407                1
+       402                2
+       404                2
+       401                1
+       403                1
+
+7 rows selected.
+
+
+
+
+SQL>  SELECT COURSE.COURSE_NAME,COUNT(ENROLLMENT.STUDENT_ID)AS ENROLLED_STUDENT
+  2   FROM COURSE
+  3   INNER JOIN ENROLLMENT
+  4  ON COURSE.COURSE_ID=ENROLLMENT.COURSE_ID
+  5   GROUP BY COURSE.COURSE_NAME;
+
+COURSE_NAME                    ENROLLED_STUDENT
+------------------------------ ----------------
+Dbms                                          2
+BEE                                           1
+computer network                              1
+COA                                           2
+Dsa                                           2
+PFPS                                          1
+Operating system                              1
+
+7 rows selected.
+
+SQL> SELECT DEPT_ID,COUNT(*)AS TOTAL_STUDENT
+  2  FROM STUDENT
+  3  GROUP BY DEPT_ID;
+
+   DEPT_ID TOTAL_STUDENT
+---------- -------------
+       101             7
+       102             3
+
+
+SQL> SELECT F.NAME,COUNT(C.COURSE_ID)AS TOTAL_COURSE
+  2  FROM FACULTY F
+  3  INNER JOIN COURSE C
+  4  ON F.FACULTY_ID=C.FACULTY_ID
+  5  GROUP BY F.NAME;
+
+NAME                                               TOTAL_COURSE
+-------------------------------------------------- ------------
+Prof. Arun Kumar                                              1
+Prof. Manisha kumari Singh                                    1
+Prof. Md.Izhar                                                1
+Prof.Sujeet kumar                                             1
+Prof. Murlidhar Prasad Singh                                  1
+Prof. Anil Kumar                                              1
+Mr. Ravi Kumar                                                1
+Prof. Md. Ehtashamoul Haque                                   1
+Prof. Amit Kumar                                              1
+Dr. Pankaj                                                    1
+
+10 rows selected.
+
+SQL> SELECT C.COURSE_NAME,MAX(E.GRADE)AS MAX_GRADE
+  2  FROM COURSE C
+  3  INNER JOIN ENROLLMENT E
+  4  ON C.COURSE_ID=E.COURSE_ID
+  5  GROUP BY C.COURSE_NAME;
+
+COURSE_NAME                    MAX_G
+------------------------------ -----
+Dbms                           B+
+BEE                            A
+computer network               B
+COA                            B+
+Dsa                            B+
+PFPS                           A
+Operating system               A
+
+7 rows selected.
+
+SQL> SELECT DEPT_ID,COUNT(*)AS TOTAL_COURSE
+  2  FROM COURSE
+  3  GROUP BY DEPT_ID;
+
+   DEPT_ID TOTAL_COURSE
+---------- ------------
+       101           10
+
+SQL> SELECT SEMESTER,COUNT(STUDENT_ID)AS TOTAL_STUDENT
+  2  FROM ENROLLMENT
+  3  GROUP BY SEMESTER;
+
+SEMESTER   TOTAL_STUDENT
+---------- -------------
+2                      3
+3                      3
+4                      2
+5                      2
+
+SQL> SELECT COURSE_ID,COUNT(STUDENT_ID)
+  2  FROM ENROLLMENT
+  3  GROUP BY COURSE_ID;
+
+ COURSE_ID COUNT(STUDENT_ID)
+---------- -----------------
+       405                 2
+       406                 1
+       407                 1
+       402                 2
+       404                 2
+       401                 1
+       403                 1
+
+7 rows selected.
+
+SQL>  SELECT COURSE_ID,COUNT(STUDENT_ID)AS TOTAL_STUDENT
+  2  FROM ENROLLMENT
+  3   GROUP BY COURSE_ID
+  4   HAVING COUNT(STUDENT_ID)>=2;
+
+ COURSE_ID TOTAL_STUDENT
+---------- -------------
+       405             2
+       402             2
+       404             2
